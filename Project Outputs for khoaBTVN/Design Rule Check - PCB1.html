@@ -1,0 +1,659 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD22\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">6/8/2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2:03:22 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\Electric\khoaBTVN\PCB1.PcbDoc" class="file"><acronym title="D:\Electric\khoaBTVN\PCB1.PcbDoc">D:\Electric\khoaBTVN\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">105</td></tr>
+</table>
+</td>
+</table><a name="IDIVE4R1P4OUKQCI2NPSHH2CVUGDZ01UADZZXLTZEVFYUQETAUQTS"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYOYNNKT2VLGJBDFGLRVU2GROJLYIMOSF4IHPIVLEUYWTMODKRXDB">Clearance Constraint (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYZ01SZRKGXVPCBWUQWYVHO2R4C314ZIEVJOWDMGELZBF3QTRVZWD">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEFK03ITHNJQ3CIK22WSKQH22ELP5QRCOT1B4KERGLGKPO0T5RIF">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">7</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDINEQ5QWLXOWWFC1YVVHQ3WH5NMKUWKC52Y2LN0KR4Q0N02JKKD">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZGJFRLIBXR5DFN3YLAMLTDCNGKHDN1OL0U31AKD10FL3V530OLNL">Width Constraint (Min=20mil) (Max=50mil) (Preferred=30mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNBZQCQKQB5FAFZ0XQYEQ2R4HHHQ3PMVZ5QDB5OGV3IHPE2PXFHTL">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKFPQ55NVYYWTMA2U1JD1VMMIHHTN05Y0OAWS2BHZJ10400WDL1SF">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBYUYDSIU3EPYI1DEFWAZEKTK5E1AQDMDDK5TMGOY32XHKW131SJO">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNTCDGB3YZJHQIRCUOJAE2VVNIH3H4JGMCRNHTCNM0TH3D0IFOROP">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">10</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZMU1P0RY3PZT4SV3UQTUKMW0LVUMOROOM0IHXI0ARAQTVQ4GNON">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">75</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRHVJXG04TJMKIZNK5MZSIVJYWAWUTHXPGSB45PBTOP1NURNFTWM">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">11</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEVWYFJP5PQL1DDN4UDOSK45HEPOTUJSYJJETXADZHJLQUGEHBCVG">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDU15BVXJHXXYPPVYX5EUZFDCYYO02ECVCWBJSLUBZXR3KTB1QZEQO">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">105</td>
+</tr>
+</table><br><a name="IDEFK03ITHNJQ3CIK22WSKQH22ELP5QRCOT1B4KERGLGKPO0T5RIF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4703.5mil|Location2.X=5115.339mil|Location1.Y=2622.5mil|Location2.Y=3850.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4703.5mil|Location2.X=5115.339mil|Location1.Y=2622.5mil|Location2.Y=3850.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad B1-1(3495mil,829mil) on Multi-Layer And Pad Q1-3(3820mil,1975mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3474.5mil|Location2.X=3622.835mil|Location1.Y=2533.5mil|Location2.Y=4092.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3474.5mil|Location2.X=3622.835mil|Location1.Y=2533.5mil|Location2.Y=4092.835mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C1-2(2261mil,745mil) on Multi-Layer And Pad U3-29(2345mil,2235mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2310mil|Location2.X=2530mil|Location1.Y=3420mil|Location2.Y=2499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2310mil|Location2.X=2530mil|Location1.Y=3420mil|Location2.Y=2499mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Track (1160mil,1690mil)(1160mil,1690mil) on Top Layer And Pad C2-1(1180mil,569mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5024.661mil|Location2.X=5667.005mil|Location1.Y=3759.661mil|Location2.Y=3850.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5024.661mil|Location2.X=5667.005mil|Location1.Y=3759.661mil|Location2.Y=3850.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad Q1-3(3820mil,1975mil) on Multi-Layer And Pad Q2-3(4371.667mil,1975mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5576.328mil|Location2.X=6218.672mil|Location1.Y=3759.661mil|Location2.Y=3850.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5576.328mil|Location2.X=6218.672mil|Location1.Y=3759.661mil|Location2.Y=3850.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad Q2-3(4371.667mil,1975mil) on Multi-Layer And Pad Q3-3(4923.333mil,1975mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6127.995mil|Location2.X=6770.338mil|Location1.Y=3759.661mil|Location2.Y=3850.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6127.995mil|Location2.X=6770.338mil|Location1.Y=3759.661mil|Location2.Y=3850.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad Q3-3(4923.333mil,1975mil) on Multi-Layer And Pad Q4-3(5475mil,1975mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2466.63mil|Location2.X=3422.835mil|Location1.Y=3476.63mil|Location2.Y=4092.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2466.63mil|Location2.X=3422.835mil|Location1.Y=3476.63mil|Location2.Y=4092.835mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad U2-18(1260mil,1690mil) on Multi-Layer And Pad U3-27(2145mil,2235mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDKFPQ55NVYYWTMA2U1JD1VMMIHHTN05Y0OAWS2BHZJ10400WDL1SF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5160.32mil|Location2.X=5279.68mil|Location1.Y=2670.32mil|Location2.Y=2789.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5160.32mil|Location2.X=5279.68mil|Location1.Y=2670.32mil|Location2.Y=2789.68mil|Absolute=True">Hole Size Constraint: (118.11mil &gt; 100mil) Pad M1-(3970mil,900mil) on Multi-Layer Actual Hole Size = 118.11mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6350.32mil|Location2.X=6469.68mil|Location1.Y=2030.32mil|Location2.Y=2149.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6350.32mil|Location2.X=6469.68mil|Location1.Y=2030.32mil|Location2.Y=2149.68mil|Absolute=True">Hole Size Constraint: (118.11mil &gt; 100mil) Pad M1-(5160mil,260mil) on Multi-Layer Actual Hole Size = 118.11mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDNTCDGB3YZJHQIRCUOJAE2VVNIH3H4JGMCRNHTCNM0TH3D0IFOROP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5214.375mil|Location2.X=5225.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5214.375mil|Location2.X=5225.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q1-1(4020mil,1975mil) on Multi-Layer And Pad Q1-2(3920mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5114.375mil|Location2.X=5125.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5114.375mil|Location2.X=5125.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q1-2(3920mil,1975mil) on Multi-Layer And Pad Q1-3(3820mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5766.042mil|Location2.X=5777.292mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5766.042mil|Location2.X=5777.292mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q2-1(4571.667mil,1975mil) on Multi-Layer And Pad Q2-2(4471.667mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5666.042mil|Location2.X=5677.292mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5666.042mil|Location2.X=5677.292mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q2-2(4471.667mil,1975mil) on Multi-Layer And Pad Q2-3(4371.667mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6317.708mil|Location2.X=6328.958mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6317.708mil|Location2.X=6328.958mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q3-1(5123.333mil,1975mil) on Multi-Layer And Pad Q3-2(5023.333mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6217.708mil|Location2.X=6228.958mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6217.708mil|Location2.X=6228.958mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q3-2(5023.333mil,1975mil) on Multi-Layer And Pad Q3-3(4923.333mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6869.375mil|Location2.X=6880.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6869.375mil|Location2.X=6880.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q4-1(5675mil,1975mil) on Multi-Layer And Pad Q4-2(5575mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6769.375mil|Location2.X=6780.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6769.375mil|Location2.X=6780.625mil|Location1.Y=3799.375mil|Location2.Y=3810.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q4-2(5575mil,1975mil) on Multi-Layer And Pad Q4-3(5475mil,1975mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2264.375mil|Location2.X=2275.625mil|Location1.Y=2044.375mil|Location2.Y=2055.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2264.375mil|Location2.X=2275.625mil|Location1.Y=2044.375mil|Location2.Y=2055.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q5-1(1070mil,220mil) on Multi-Layer And Pad Q5-2(970mil,220mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2164.375mil|Location2.X=2175.625mil|Location1.Y=2044.375mil|Location2.Y=2055.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2164.375mil|Location2.X=2175.625mil|Location1.Y=2044.375mil|Location2.Y=2055.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.323mil &lt; 10mil) Between Pad Q5-2(970mil,220mil) on Multi-Layer And Pad Q5-3(870mil,220mil) on Multi-Layer [Top Solder] Mask Sliver [9.323mil] / [Bottom Solder] Mask Sliver [9.323mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDZMU1P0RY3PZT4SV3UQTUKMW0LVUMOROOM0IHXI0ARAQTVQ4GNON"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4697.375mil|Location2.X=4708.625mil|Location1.Y=2620.875mil|Location2.Y=2632.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4697.375mil|Location2.X=4708.625mil|Location1.Y=2620.875mil|Location2.Y=2632.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad B1-1(3495mil,829mil) on Multi-Layer And Track (3445mil,779mil)(3445mil,979mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4701.875mil|Location2.X=4713.125mil|Location1.Y=2690.375mil|Location2.Y=2701.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4701.875mil|Location2.X=4713.125mil|Location1.Y=2690.375mil|Location2.Y=2701.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad B1-1(3495mil,829mil) on Multi-Layer And Track (3446mil,874mil)(3545mil,874mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4781.375mil|Location2.X=4792.625mil|Location1.Y=2620.875mil|Location2.Y=2632.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4781.375mil|Location2.X=4792.625mil|Location1.Y=2620.875mil|Location2.Y=2632.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad B1-1(3495mil,829mil) on Multi-Layer And Track (3545mil,779mil)(3545mil,979mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4697.368mil|Location2.X=4708.618mil|Location1.Y=2754.375mil|Location2.Y=2765.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4697.368mil|Location2.X=4708.618mil|Location1.Y=2754.375mil|Location2.Y=2765.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad B1-2(3495mil,930mil) on Multi-Layer And Track (3445mil,779mil)(3445mil,979mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4781.382mil|Location2.X=4792.632mil|Location1.Y=2754.375mil|Location2.Y=2765.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4781.382mil|Location2.X=4792.632mil|Location1.Y=2754.375mil|Location2.Y=2765.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad B1-2(3495mil,930mil) on Multi-Layer And Track (3545mil,779mil)(3545mil,979mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.875mil|Location2.X=3549.125mil|Location1.Y=2277.375mil|Location2.Y=2288.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3537.875mil|Location2.X=3549.125mil|Location1.Y=2277.375mil|Location2.Y=2288.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad B2-1(2261mil,495mil) on Multi-Layer And Track (2111mil,445mil)(2311mil,445mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3472.875mil|Location2.X=3484.125mil|Location1.Y=2361.375mil|Location2.Y=2372.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3472.875mil|Location2.X=3484.125mil|Location1.Y=2361.375mil|Location2.Y=2372.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad B2-1(2261mil,495mil) on Multi-Layer And Track (2111mil,545mil)(2311mil,545mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3468.375mil|Location2.X=3479.625mil|Location1.Y=2281.875mil|Location2.Y=2293.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3468.375mil|Location2.X=3479.625mil|Location1.Y=2281.875mil|Location2.Y=2293.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad B2-1(2261mil,495mil) on Multi-Layer And Track (2216mil,446mil)(2216mil,545mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.375mil|Location2.X=3415.625mil|Location1.Y=2277.368mil|Location2.Y=2288.618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.375mil|Location2.X=3415.625mil|Location1.Y=2277.368mil|Location2.Y=2288.618mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad B2-2(2160mil,495mil) on Multi-Layer And Track (2111mil,445mil)(2311mil,445mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.375mil|Location2.X=3415.625mil|Location1.Y=2361.382mil|Location2.Y=2372.632mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3404.375mil|Location2.X=3415.625mil|Location1.Y=2361.382mil|Location2.Y=2372.632mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad B2-2(2160mil,495mil) on Multi-Layer And Track (2111mil,545mil)(2311mil,545mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3436.875mil|Location2.X=3448.125mil|Location1.Y=2527.375mil|Location2.Y=2538.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3436.875mil|Location2.X=3448.125mil|Location1.Y=2527.375mil|Location2.Y=2538.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad C1-1(2160mil,745mil) on Multi-Layer And Track (2110mil,695mil)(2310mil,695mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3371.875mil|Location2.X=3383.125mil|Location1.Y=2611.375mil|Location2.Y=2622.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3371.875mil|Location2.X=3383.125mil|Location1.Y=2611.375mil|Location2.Y=2622.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad C1-1(2160mil,745mil) on Multi-Layer And Track (2110mil,795mil)(2310mil,795mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.375mil|Location2.X=3452.625mil|Location1.Y=2531.875mil|Location2.Y=2543.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.375mil|Location2.X=3452.625mil|Location1.Y=2531.875mil|Location2.Y=2543.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad C1-1(2160mil,745mil) on Multi-Layer And Track (2205mil,695mil)(2205mil,794mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3505.375mil|Location2.X=3516.625mil|Location1.Y=2527.368mil|Location2.Y=2538.618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3505.375mil|Location2.X=3516.625mil|Location1.Y=2527.368mil|Location2.Y=2538.618mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad C1-2(2261mil,745mil) on Multi-Layer And Track (2110mil,695mil)(2310mil,695mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3505.375mil|Location2.X=3516.625mil|Location1.Y=2611.382mil|Location2.Y=2622.632mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3505.375mil|Location2.X=3516.625mil|Location1.Y=2611.382mil|Location2.Y=2622.632mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad C1-2(2261mil,745mil) on Multi-Layer And Track (2110mil,795mil)(2310mil,795mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2382.375mil|Location2.X=2393.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2382.375mil|Location2.X=2393.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad C2-1(1180mil,569mil) on Multi-Layer And Track (1130mil,519mil)(1130mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.875mil|Location2.X=2398.125mil|Location1.Y=2430.375mil|Location2.Y=2441.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2386.875mil|Location2.X=2398.125mil|Location1.Y=2430.375mil|Location2.Y=2441.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad C2-1(1180mil,569mil) on Multi-Layer And Track (1131mil,614mil)(1230mil,614mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2466.375mil|Location2.X=2477.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2466.375mil|Location2.X=2477.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad C2-1(1180mil,569mil) on Multi-Layer And Track (1230mil,519mil)(1230mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2382.368mil|Location2.X=2393.618mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2382.368mil|Location2.X=2393.618mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad C2-2(1180mil,670mil) on Multi-Layer And Track (1130mil,519mil)(1130mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2466.382mil|Location2.X=2477.632mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2466.382mil|Location2.X=2477.632mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad C2-2(1180mil,670mil) on Multi-Layer And Track (1230mil,519mil)(1230mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2632.375mil|Location2.X=2643.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2632.375mil|Location2.X=2643.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad Di1-1(1430mil,569mil) on Multi-Layer And Track (1380mil,519mil)(1380mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.875mil|Location2.X=2648.125mil|Location1.Y=2430.375mil|Location2.Y=2441.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2636.875mil|Location2.X=2648.125mil|Location1.Y=2430.375mil|Location2.Y=2441.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad Di1-1(1430mil,569mil) on Multi-Layer And Track (1381mil,614mil)(1480mil,614mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2716.375mil|Location2.X=2727.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2716.375mil|Location2.X=2727.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad Di1-1(1430mil,569mil) on Multi-Layer And Track (1480mil,519mil)(1480mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2632.368mil|Location2.X=2643.618mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2632.368mil|Location2.X=2643.618mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad Di1-2(1430mil,670mil) on Multi-Layer And Track (1380mil,519mil)(1380mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2716.382mil|Location2.X=2727.632mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2716.382mil|Location2.X=2727.632mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad Di1-2(1430mil,670mil) on Multi-Layer And Track (1480mil,519mil)(1480mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6982.375mil|Location2.X=6993.625mil|Location1.Y=3055.875mil|Location2.Y=3067.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6982.375mil|Location2.X=6993.625mil|Location1.Y=3055.875mil|Location2.Y=3067.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R1-1(5780mil,1264mil) on Multi-Layer And Track (5730mil,1214mil)(5730mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6986.875mil|Location2.X=6998.125mil|Location1.Y=3125.375mil|Location2.Y=3136.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6986.875mil|Location2.X=6998.125mil|Location1.Y=3125.375mil|Location2.Y=3136.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R1-1(5780mil,1264mil) on Multi-Layer And Track (5731mil,1309mil)(5830mil,1309mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7066.375mil|Location2.X=7077.625mil|Location1.Y=3055.875mil|Location2.Y=3067.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7066.375mil|Location2.X=7077.625mil|Location1.Y=3055.875mil|Location2.Y=3067.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R1-1(5780mil,1264mil) on Multi-Layer And Track (5830mil,1214mil)(5830mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6982.368mil|Location2.X=6993.618mil|Location1.Y=3189.375mil|Location2.Y=3200.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6982.368mil|Location2.X=6993.618mil|Location1.Y=3189.375mil|Location2.Y=3200.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R1-2(5780mil,1365mil) on Multi-Layer And Track (5730mil,1214mil)(5730mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7066.382mil|Location2.X=7077.632mil|Location1.Y=3189.375mil|Location2.Y=3200.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7066.382mil|Location2.X=7077.632mil|Location1.Y=3189.375mil|Location2.Y=3200.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R1-2(5780mil,1365mil) on Multi-Layer And Track (5830mil,1214mil)(5830mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5422.375mil|Location2.X=5433.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5422.375mil|Location2.X=5433.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R2-1(4220mil,1369mil) on Multi-Layer And Track (4170mil,1319mil)(4170mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5426.875mil|Location2.X=5438.125mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5426.875mil|Location2.X=5438.125mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R2-1(4220mil,1369mil) on Multi-Layer And Track (4171mil,1414mil)(4270mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5506.375mil|Location2.X=5517.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5506.375mil|Location2.X=5517.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R2-1(4220mil,1369mil) on Multi-Layer And Track (4270mil,1319mil)(4270mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5422.368mil|Location2.X=5433.618mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5422.368mil|Location2.X=5433.618mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R2-2(4220mil,1470mil) on Multi-Layer And Track (4170mil,1319mil)(4170mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5506.382mil|Location2.X=5517.632mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5506.382mil|Location2.X=5517.632mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R2-2(4220mil,1470mil) on Multi-Layer And Track (4270mil,1319mil)(4270mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5779.042mil|Location2.X=5790.292mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5779.042mil|Location2.X=5790.292mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R3-1(4576.667mil,1369mil) on Multi-Layer And Track (4526.667mil,1319mil)(4526.667mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5783.542mil|Location2.X=5794.792mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5783.542mil|Location2.X=5794.792mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R3-1(4576.667mil,1369mil) on Multi-Layer And Track (4527.667mil,1414mil)(4626.667mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5863.042mil|Location2.X=5874.292mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5863.042mil|Location2.X=5874.292mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R3-1(4576.667mil,1369mil) on Multi-Layer And Track (4626.667mil,1319mil)(4626.667mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5779.034mil|Location2.X=5790.284mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5779.034mil|Location2.X=5790.284mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R3-2(4576.667mil,1470mil) on Multi-Layer And Track (4526.667mil,1319mil)(4526.667mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5863.049mil|Location2.X=5874.299mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5863.049mil|Location2.X=5874.299mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R3-2(4576.667mil,1470mil) on Multi-Layer And Track (4626.667mil,1319mil)(4626.667mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6135.708mil|Location2.X=6146.958mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6135.708mil|Location2.X=6146.958mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R4-1(4933.333mil,1369mil) on Multi-Layer And Track (4883.333mil,1319mil)(4883.333mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6140.208mil|Location2.X=6151.458mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6140.208mil|Location2.X=6151.458mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R4-1(4933.333mil,1369mil) on Multi-Layer And Track (4884.333mil,1414mil)(4983.333mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6219.708mil|Location2.X=6230.958mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6219.708mil|Location2.X=6230.958mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R4-1(4933.333mil,1369mil) on Multi-Layer And Track (4983.333mil,1319mil)(4983.333mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6135.701mil|Location2.X=6146.951mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6135.701mil|Location2.X=6146.951mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R4-2(4933.333mil,1470mil) on Multi-Layer And Track (4883.333mil,1319mil)(4883.333mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6219.716mil|Location2.X=6230.966mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6219.716mil|Location2.X=6230.966mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R4-2(4933.333mil,1470mil) on Multi-Layer And Track (4983.333mil,1319mil)(4983.333mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6492.375mil|Location2.X=6503.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6492.375mil|Location2.X=6503.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R5-1(5290mil,1369mil) on Multi-Layer And Track (5240mil,1319mil)(5240mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6496.875mil|Location2.X=6508.125mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6496.875mil|Location2.X=6508.125mil|Location1.Y=3230.375mil|Location2.Y=3241.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R5-1(5290mil,1369mil) on Multi-Layer And Track (5241mil,1414mil)(5340mil,1414mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6576.375mil|Location2.X=6587.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6576.375mil|Location2.X=6587.625mil|Location1.Y=3160.875mil|Location2.Y=3172.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R5-1(5290mil,1369mil) on Multi-Layer And Track (5340mil,1319mil)(5340mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6492.367mil|Location2.X=6503.617mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6492.367mil|Location2.X=6503.617mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R5-2(5290mil,1470mil) on Multi-Layer And Track (5240mil,1319mil)(5240mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6576.382mil|Location2.X=6587.632mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6576.382mil|Location2.X=6587.632mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R5-2(5290mil,1470mil) on Multi-Layer And Track (5340mil,1319mil)(5340mil,1519mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2122.375mil|Location2.X=2133.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2122.375mil|Location2.X=2133.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R6-1(920mil,569mil) on Multi-Layer And Track (870mil,519mil)(870mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2126.875mil|Location2.X=2138.125mil|Location1.Y=2430.375mil|Location2.Y=2441.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2126.875mil|Location2.X=2138.125mil|Location1.Y=2430.375mil|Location2.Y=2441.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R6-1(920mil,569mil) on Multi-Layer And Track (871mil,614mil)(970mil,614mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.375mil|Location2.X=2217.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.375mil|Location2.X=2217.625mil|Location1.Y=2360.875mil|Location2.Y=2372.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R6-1(920mil,569mil) on Multi-Layer And Track (970mil,519mil)(970mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2122.368mil|Location2.X=2133.618mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2122.368mil|Location2.X=2133.618mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R6-2(920mil,670mil) on Multi-Layer And Track (870mil,519mil)(870mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.382mil|Location2.X=2217.632mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2206.382mil|Location2.X=2217.632mil|Location1.Y=2494.375mil|Location2.Y=2505.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R6-2(920mil,670mil) on Multi-Layer And Track (970mil,519mil)(970mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1907.375mil|Location2.X=1918.625mil|Location1.Y=2460.875mil|Location2.Y=2472.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1907.375mil|Location2.X=1918.625mil|Location1.Y=2460.875mil|Location2.Y=2472.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R7-1(705mil,669mil) on Multi-Layer And Track (655mil,519mil)(655mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1911.875mil|Location2.X=1923.125mil|Location1.Y=2456.375mil|Location2.Y=2467.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1911.875mil|Location2.X=1923.125mil|Location1.Y=2456.375mil|Location2.Y=2467.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R7-1(705mil,669mil) on Multi-Layer And Track (655mil,624mil)(754mil,624mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1991.375mil|Location2.X=2002.625mil|Location1.Y=2460.875mil|Location2.Y=2472.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1991.375mil|Location2.X=2002.625mil|Location1.Y=2460.875mil|Location2.Y=2472.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R7-1(705mil,669mil) on Multi-Layer And Track (755mil,519mil)(755mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1907.368mil|Location2.X=1918.618mil|Location1.Y=2392.375mil|Location2.Y=2403.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1907.368mil|Location2.X=1918.618mil|Location1.Y=2392.375mil|Location2.Y=2403.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R7-2(705mil,568mil) on Multi-Layer And Track (655mil,519mil)(655mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1991.382mil|Location2.X=2002.632mil|Location1.Y=2392.375mil|Location2.Y=2403.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1991.382mil|Location2.X=2002.632mil|Location1.Y=2392.375mil|Location2.Y=2403.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R7-2(705mil,568mil) on Multi-Layer And Track (755mil,519mil)(755mil,719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.875mil|Location2.X=3453.125mil|Location1.Y=2002.375mil|Location2.Y=2013.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3441.875mil|Location2.X=3453.125mil|Location1.Y=2002.375mil|Location2.Y=2013.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R8-1(2165mil,220mil) on Multi-Layer And Track (2115mil,170mil)(2315mil,170mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.875mil|Location2.X=3388.125mil|Location1.Y=2086.375mil|Location2.Y=2097.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3376.875mil|Location2.X=3388.125mil|Location1.Y=2086.375mil|Location2.Y=2097.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R8-1(2165mil,220mil) on Multi-Layer And Track (2115mil,270mil)(2315mil,270mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3446.375mil|Location2.X=3457.625mil|Location1.Y=2006.875mil|Location2.Y=2018.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3446.375mil|Location2.X=3457.625mil|Location1.Y=2006.875mil|Location2.Y=2018.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9mil &lt; 10mil) Between Pad R8-1(2165mil,220mil) on Multi-Layer And Track (2210mil,170mil)(2210mil,269mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3510.375mil|Location2.X=3521.625mil|Location1.Y=2002.368mil|Location2.Y=2013.618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3510.375mil|Location2.X=3521.625mil|Location1.Y=2002.368mil|Location2.Y=2013.618mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R8-2(2266mil,220mil) on Multi-Layer And Track (2115mil,170mil)(2315mil,170mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3510.375mil|Location2.X=3521.625mil|Location1.Y=2086.382mil|Location2.Y=2097.632mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3510.375mil|Location2.X=3521.625mil|Location1.Y=2086.382mil|Location2.Y=2097.632mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad R8-2(2266mil,220mil) on Multi-Layer And Track (2115mil,270mil)(2315mil,270mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3910.375mil|Location2.Y=3921.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3910.375mil|Location2.Y=3921.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-1(490mil,2086mil) on Multi-Layer And Track (440mil,1736mil)(440mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1739.375mil|Location2.X=1750.625mil|Location1.Y=3873.368mil|Location2.Y=3884.618mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1739.375mil|Location2.X=1750.625mil|Location1.Y=3873.368mil|Location2.Y=3884.618mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-1(490mil,2086mil) on Multi-Layer And Track (440mil,2041mil)(539mil,2041mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3910.375mil|Location2.Y=3921.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3910.375mil|Location2.Y=3921.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-1(490mil,2086mil) on Multi-Layer And Track (540mil,1736mil)(540mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3809.375mil|Location2.Y=3820.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3809.375mil|Location2.Y=3820.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-2(490mil,1985mil) on Multi-Layer And Track (440mil,1736mil)(440mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3809.375mil|Location2.Y=3820.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3809.375mil|Location2.Y=3820.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-2(490mil,1985mil) on Multi-Layer And Track (540mil,1736mil)(540mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3711.375mil|Location2.Y=3722.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3711.375mil|Location2.Y=3722.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-3(490mil,1887mil) on Multi-Layer And Track (440mil,1736mil)(440mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3711.375mil|Location2.Y=3722.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3711.375mil|Location2.Y=3722.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-3(490mil,1887mil) on Multi-Layer And Track (540mil,1736mil)(540mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3610.375mil|Location2.Y=3621.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1692.368mil|Location2.X=1703.618mil|Location1.Y=3610.375mil|Location2.Y=3621.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-4(490mil,1786mil) on Multi-Layer And Track (440mil,1736mil)(440mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3610.375mil|Location2.Y=3621.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.382mil|Location2.X=1787.632mil|Location1.Y=3610.375mil|Location2.Y=3621.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.985mil &lt; 10mil) Between Pad U1-4(490mil,1786mil) on Multi-Layer And Track (540mil,1736mil)(540mil,2136mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.985mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2289.023mil|Location2.X=2300.273mil|Location1.Y=3474.012mil|Location2.Y=3485.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2289.023mil|Location2.X=2300.273mil|Location1.Y=3474.012mil|Location2.Y=3485.262mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.592mil &lt; 10mil) Between Pad U2-20(1060mil,1690mil) on Multi-Layer And Text "3.3V" (1078.722mil,1524mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.592mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDRHVJXG04TJMKIZNK5MZSIVJYWAWUTHXPGSB45PBTOP1NURNFTWM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3396.138mil|Location2.X=3403.804mil|Location1.Y=2490.167mil|Location2.Y=2497.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3396.138mil|Location2.X=3403.804mil|Location1.Y=2490.167mil|Location2.Y=2497.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Region (0 hole(s)) Top Overlay And Text "B2" (2118mil,606mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.875mil|Location2.X=2337.125mil|Location1.Y=3362.566mil|Location2.Y=3373.816mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.875mil|Location2.X=2337.125mil|Location1.Y=3362.566mil|Location2.Y=3373.816mil|Absolute=True">Silk To Silk Clearance Constraint: (4mil &lt; 10mil) Between Text "3.3V" (1078.722mil,1524mil) on Top Overlay And Track (1088.5mil,1190mil)(1088.5mil,1590mil) on Top Overlay Silk Text to Silk Clearance [4mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2279.853mil|Location2.X=2287.52mil|Location1.Y=3416.167mil|Location2.Y=3423.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2279.853mil|Location2.X=2287.52mil|Location1.Y=3416.167mil|Location2.Y=3423.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "3.3V" (1078.722mil,1524mil) on Top Overlay And Track (863.5mil,1590mil)(1088.5mil,1590mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4183.825mil|Location2.X=4191.492mil|Location1.Y=3367.167mil|Location2.Y=3374.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4183.825mil|Location2.X=4191.492mil|Location1.Y=3367.167mil|Location2.Y=3374.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "B12" (2982.5mil,1529.4mil) on Top Overlay And Track (2922mil,1541mil)(3122mil,1541mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4186.047mil|Location2.X=4193.714mil|Location1.Y=3070.682mil|Location2.Y=3078.348mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4186.047mil|Location2.X=4193.714mil|Location1.Y=3070.682mil|Location2.Y=3078.348mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "GND" (2984.722mil,1149mil) on Top Overlay And Track (2922mil,1241.8mil)(3122mil,1241.8mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4186.047mil|Location2.X=4193.714mil|Location1.Y=3070.682mil|Location2.Y=3078.348mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4186.047mil|Location2.X=4193.714mil|Location1.Y=3070.682mil|Location2.Y=3078.348mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "GND" (2984.722mil,1149mil) on Top Overlay And Track (2922mil,1241mil)(3122mil,1241mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3354.907mil|Location2.X=3366.157mil|Location1.Y=2098.849mil|Location2.Y=2110.099mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3354.907mil|Location2.X=3366.157mil|Location1.Y=2098.849mil|Location2.Y=2110.099mil|Absolute=True">Silk To Silk Clearance Constraint: (5.647mil &lt; 10mil) Between Text "R8" (2065.016mil,280.01mil) on Top Overlay And Track (2115mil,170mil)(2115mil,270mil) on Top Overlay Silk Text to Silk Clearance [5.647mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3399.362mil|Location2.X=3410.612mil|Location1.Y=2098.63mil|Location2.Y=2109.88mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3399.362mil|Location2.X=3410.612mil|Location1.Y=2098.63mil|Location2.Y=2109.88mil|Absolute=True">Silk To Silk Clearance Constraint: (1.51mil &lt; 10mil) Between Text "R8" (2065.016mil,280.01mil) on Top Overlay And Track (2115mil,270mil)(2315mil,270mil) on Top Overlay Silk Text to Silk Clearance [1.51mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2329.667mil|Location2.X=2337.333mil|Location1.Y=3024.169mil|Location2.Y=3031.836mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2329.667mil|Location2.X=2337.333mil|Location1.Y=3024.169mil|Location2.Y=3031.836mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "VBAT" (1083.5mil,1151.865mil) on Top Overlay And Track (1088.5mil,1190mil)(1088.5mil,1590mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2284.825mil|Location2.X=2292.492mil|Location1.Y=3013.023mil|Location2.Y=3020.69mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2284.825mil|Location2.X=2292.492mil|Location1.Y=3013.023mil|Location2.Y=3020.69mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "VBAT" (1083.5mil,1151.865mil) on Top Overlay And Track (863.5mil,1190mil)(1088.5mil,1190mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2284.825mil|Location2.X=2292.492mil|Location1.Y=3013.023mil|Location2.Y=3020.69mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\Electric\khoaBTVN\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2284.825mil|Location2.X=2292.492mil|Location1.Y=3013.023mil|Location2.Y=3020.69mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 10mil) Between Text "VBAT" (1083.5mil,1151.865mil) on Top Overlay And Track (863.5mil,1190mil)(1088.5mil,1190mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
