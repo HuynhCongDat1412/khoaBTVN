@@ -1,0 +1,14 @@
+Removed Pin From Net: NetName=GND Pin=R1-1
+Removed Pin From Net: NetName=STM_A1 Pin=R1-2
+Change Component Designator: OldDesignator=R6 NewDesignator=R1
+Change Component Designator: OldDesignator=R7 NewDesignator=R6
+Change Component Designator: OldDesignator=R8 NewDesignator=R7
+Change Net Name : Old Net Name=NetQ1_2 New Net Name=D_Q1
+Change Net Name : Old Net Name=NetQ2_2 New Net Name=D_Q2
+Change Net Name : Old Net Name=NetQ3_2 New Net Name=D_Q3
+Change Net Name : Old Net Name=NetQ4_2 New Net Name=D_Q4
+Change Net Name : Old Net Name=NetQ5_1 New Net Name=G_Q5
+Change Net Name : Old Net Name=NetQ5_3 New Net Name=S_Q5
+Change Net Name : Old Net Name=Vol+ New Net Name=D_Q5
+Added Member To Class: ClassName=sche_v1 Member=Component R1 10K
+Added Room: Name=sche_v1

@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : D:\Electric\khoaBTVN\PCB1.PcbDoc
 Date     : 6/8/2025
-Time     : 2:03:22 PM
+Time     : 2:13:00 PM
 
 Processing Rule : Clearance Constraint (Gap=10mil) (All),(All)
 Rule Violations :0
@@ -12,7 +12,7 @@ Rule Violations :0
 Processing Rule : Un-Routed Net Constraint ( (All) )
    Violation between Un-Routed Net Constraint: Net 5V Between Pad B1-1(3495mil,829mil) on Multi-Layer And Pad Q1-3(3820mil,1975mil) on Multi-Layer 
    Violation between Un-Routed Net Constraint: Net GND Between Pad C1-2(2261mil,745mil) on Multi-Layer And Pad U3-29(2345mil,2235mil) on Multi-Layer 
-   Violation between Un-Routed Net Constraint: Net GND Between Track (1160mil,1690mil)(1160mil,1690mil) on Top Layer And Pad C2-1(1180mil,569mil) on Multi-Layer 
+   Violation between Un-Routed Net Constraint: Net GND Between Track (1064mil,1786mil)(1160mil,1690mil) on Top Layer And Pad C2-1(1180mil,569mil) on Multi-Layer 
    Violation between Un-Routed Net Constraint: Net 5V Between Pad Q1-3(3820mil,1975mil) on Multi-Layer And Pad Q2-3(4371.667mil,1975mil) on Multi-Layer 
    Violation between Un-Routed Net Constraint: Net 5V Between Pad Q2-3(4371.667mil,1975mil) on Multi-Layer And Pad Q3-3(4923.333mil,1975mil) on Multi-Layer 
    Violation between Un-Routed Net Constraint: Net 5V Between Pad Q3-3(4923.333mil,1975mil) on Multi-Layer And Pad Q4-3(5475mil,1975mil) on Multi-Layer 
@@ -150,4 +150,4 @@ Rule Violations :0
 
 Violations Detected : 105
 Waived Violations : 0
-Time Elapsed        : 00:00:01
+Time Elapsed        : 00:00:02
